@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import time
 import torch
 import torch.nn as nn
@@ -13,13 +11,16 @@ from tqdm import tqdm
 import csv
 import timm
 import wandb
-
 from PIL import Image
 import torchvision.transforms.v2 as transforms
+!/usr/bin/env python3
+!pip install requirements.txt
+
 
 # UTILITIES
 
-def smart_resize(data, size): # kudos louis
+
+def smart_resize(data, size):  # kudos louis
     # Prends un tensor de shape [...,C,H,W] et le resize en [C,new_height,new_width]
     # x, y, height et width servent a faire un crop avant de resize
 
@@ -41,6 +42,7 @@ def smart_resize(data, size): # kudos louis
     ])
     return tr(data)
 
+
 def resize_data(data, new_height, new_width, x=0, y=0, height=None, width=None):
     # Prends un tensor de shape [...,C,H,W] et le resize en [C,new_height,new_width]
     # x, y, height et width servent a faire un crop avant de resize
@@ -48,7 +50,7 @@ def resize_data(data, new_height, new_width, x=0, y=0, height=None, width=None):
     full_height = data.shape[-2]
     full_width = data.shape[-1]
     height = full_height - y if height is None else height
-    width = full_width -x if width is None else width
+    width = full_width - x if width is None else width
 
     ratio = new_height/new_width
     if height/width > ratio:
@@ -64,7 +66,8 @@ def resize_data(data, new_height, new_width, x=0, y=0, height=None, width=None):
         transforms.CenterCrop((expand_height, expand_width)),
         transforms.Resize((new_height, new_width))
     ])
-    x = data[...,y:min(y+height, full_height), x:min(x+width, full_width)].clone()
+    x = data[..., y:min(y+height, full_height),
+             x:min(x+width, full_width)].clone()
     return tr(x)
 
 
@@ -74,7 +77,7 @@ dataset_dir = "/raid/datasets/hackathon2024"
 root_dir = os.path.expanduser("~/automathon-2024")
 nb_frames = 10
 
-## MAKE RESIZED DATASET
+# MAKE RESIZED DATASET
 create_small_dataset = False
 resized_dir = os.path.join(dataset_dir, "resized_dataset")
 errors = []
@@ -83,30 +86,34 @@ if not os.path.exists(resized_dir) or create_small_dataset:
     os.mkdir(os.path.join(resized_dir, "train_dataset"))
     os.mkdir(os.path.join(resized_dir, "test_dataset"))
     os.mkdir(os.path.join(resized_dir, "experimental_dataset"))
-    train_files = [f for f in os.listdir(os.path.join(dataset_dir, "train_dataset")) if f.endswith('.mp4')]
-    test_files = [f for f in os.listdir(os.path.join(dataset_dir, "test_dataset")) if f.endswith('.mp4')]
-    experimental_files = [f for f in os.listdir(os.path.join(dataset_dir, "experimental_dataset")) if f.endswith('.mp4')]
+    train_files = [f for f in os.listdir(os.path.join(
+        dataset_dir, "train_dataset")) if f.endswith('.mp4')]
+    test_files = [f for f in os.listdir(os.path.join(
+        dataset_dir, "test_dataset")) if f.endswith('.mp4')]
+    experimental_files = [f for f in os.listdir(os.path.join(
+        dataset_dir, "experimental_dataset")) if f.endswith('.mp4')]
+
     def resize(in_video_path, out_video_path, nb_frames=10):
         # use time to measure the time it takes to resize a video
         t1 = time.time()
         reader = io.VideoReader(in_video_path)
         # take 10 frames uniformly sampled from the video
-        duration = 10 # maximum duration of the video
+        duration = 10  # maximum duration of the video
         frames = []
         for i in range(10):
             reader.seek(1)
             frame = next(reader)
-            frames.append(frame['data'])        
+            frames.append(frame['data'])
         video = torch.stack(frames)
-        #video, audio, info = io.read_video(in_video_path, pts_unit='sec', start_pts=0, end_pts=10, output_format='TCHW')
+        # video, audio, info = io.read_video(in_video_path, pts_unit='sec', start_pts=0, end_pts=10, output_format='TCHW')
         t2 = time.time()
         video = smart_resize(video, 256)
         t3 = time.time()
         torch.save(video, out_video_path)
         t4 = time.time()
         print(f"read: {t2-t1}, resize: {t3-t2}, save: {t4-t3}")
-        #video = video.permute(0,2,3,1)
-        #io.write_video(video_path, video, 15, video_codec='h264')
+        # video = video.permute(0,2,3,1)
+        # io.write_video(video_path, video, 15, video_codec='h264')
 
     """
     for f in tqdm(train_files):
@@ -120,7 +127,8 @@ if not os.path.exists(resized_dir) or create_small_dataset:
     """
     for f in tqdm(test_files):
         in_video_path = os.path.join(dataset_dir, "test_dataset", f)
-        out_video_path = os.path.join(resized_dir, "test_dataset", f[:-3] + "pt")
+        out_video_path = os.path.join(
+            resized_dir, "test_dataset", f[:-3] + "pt")
         try:
             resize(in_video_path, out_video_path)
         except Exception as e:
@@ -128,14 +136,16 @@ if not os.path.exists(resized_dir) or create_small_dataset:
         print(f"resized {f} from test")
     for f in tqdm(experimental_files):
         in_video_path = os.path.join(dataset_dir, "experimental_dataset", f)
-        out_video_path = os.path.join(resized_dir, "experimental_dataset", f[:-3] + "pt")
+        out_video_path = os.path.join(
+            resized_dir, "experimental_dataset", f[:-3] + "pt")
         try:
             resize(in_video_path, out_video_path)
         except Exception as e:
             errors.append((f, e))
         print(f"resized {f} from experimental")
     os.system(f"cp {os.path.join(dataset_dir, 'train_dataset', 'metadata.json')} {os.path.join(resized_dir, 'train_dataset', 'metadata.json')}")
-    os.system(f"cp {os.path.join(dataset_dir, 'dataset.csv')} {os.path.join(resized_dir, 'dataset.csv')}")
+    os.system(
+        f"cp {os.path.join(dataset_dir, 'dataset.csv')} {os.path.join(resized_dir, 'dataset.csv')}")
     os.system(f"cp {os.path.join(dataset_dir, 'experimental_dataset', 'metadata.json')} {os.path.join(resized_dir, 'experimental_dataset', 'metadata.json')}")
     if errors:
         print(errors)
@@ -146,53 +156,58 @@ if use_small_dataset:
 
 nb_frames = 10
 
+
 class VideoDataset(Dataset):
     """
     This Dataset takes a video and returns a tensor of shape [10, 3, 256, 256]
     That is 10 colored frames of 256x256 pixels.
     """
+
     def __init__(self, root_dir, dataset_choice="train", nb_frames=10):
         super().__init__()
         self.dataset_choice = dataset_choice
-        if  self.dataset_choice == "train":
+        if self.dataset_choice == "train":
             self.root_dir = os.path.join(root_dir, "train_dataset")
-        elif  self.dataset_choice == "test":
+        elif self.dataset_choice == "test":
             self.root_dir = os.path.join(root_dir, "test_dataset")
-        elif  self.dataset_choice == "experimental":
+        elif self.dataset_choice == "experimental":
             self.root_dir = os.path.join(root_dir, "experimental_dataset")
         else:
-            raise ValueError("choice must be 'train', 'test' or 'experimental'")
+            raise ValueError(
+                "choice must be 'train', 'test' or 'experimental'")
 
         with open(os.path.join(root_dir, "dataset.csv"), 'r') as file:
             reader = csv.reader(file)
             # read dataset.csv with id,label columns to create
             # a dict which associated label: id
-            self.ids = {row[1][:-3] + "pt" : row[0] for row in reader}
+            self.ids = {row[1][:-3] + "pt": row[0] for row in reader}
 
         if self.dataset_choice == "test":
             self.data = None
         else:
             with open(os.path.join(self.root_dir, "metadata.json"), 'r') as file:
-                self.data= json.load(file)
-                self.data = {k[:-3] + "pt" : (torch.tensor(float(1)) if v == 'FAKE' else torch.tensor(float(0))) for k, v in self.data.items()}
+                self.data = json.load(file)
+                self.data = {k[:-3] + "pt": (torch.tensor(float(
+                    1)) if v == 'FAKE' else torch.tensor(float(0))) for k, v in self.data.items()}
 
-        #self.video_files = [f for f in os.listdir(self.root_dir) if f.endswith('.mp4')]
-        self.video_files = [f for f in os.listdir(self.root_dir) if f.endswith('.pt')]
+        # self.video_files = [f for f in os.listdir(self.root_dir) if f.endswith('.mp4')]
+        self.video_files = [f for f in os.listdir(
+            self.root_dir) if f.endswith('.pt')]
 
     def __len__(self):
         return len(self.video_files)
 
     def __getitem__(self, idx):
         video_path = os.path.join(self.root_dir, self.video_files[idx])
-        #video, audio, info = io.read_video(video_path, pts_unit='sec')
+        # video, audio, info = io.read_video(video_path, pts_unit='sec')
         video = torch.load(video_path)
 
-        video = video.permute(0,3,1,2)
+        video = video.permute(0, 3, 1, 2)
         length = video.shape[0]
         video = video[[i*(length//(nb_frames)) for i in range(nb_frames)]]
 
         # resize the data into a reglar shape of 256x256 and normalize it
-        #video = smart_resize(video, 256) / 255
+        # video = smart_resize(video, 256) / 255
         video = video / 255
 
         ID = self.ids[self.video_files[idx]]
@@ -203,10 +218,11 @@ class VideoDataset(Dataset):
             return video, label, ID
 
 
-
-#train_dataset = VideoDataset(dataset_dir, dataset_choice="train", nb_frames=nb_frames)
-test_dataset = VideoDataset(dataset_dir, dataset_choice="test", nb_frames=nb_frames)
-experimental_dataset = VideoDataset(dataset_dir, dataset_choice="experimental", nb_frames=nb_frames)
+# train_dataset = VideoDataset(dataset_dir, dataset_choice="train", nb_frames=nb_frames)
+test_dataset = VideoDataset(
+    dataset_dir, dataset_choice="test", nb_frames=nb_frames)
+experimental_dataset = VideoDataset(
+    dataset_dir, dataset_choice="experimental", nb_frames=nb_frames)
 
 
 # MODELE
@@ -214,7 +230,7 @@ experimental_dataset = VideoDataset(dataset_dir, dataset_choice="experimental", 
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.dense = nn.Linear(nb_frames*3*256*256,1)
+        self.dense = nn.Linear(nb_frames*3*256*256, 1)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
 
@@ -225,6 +241,7 @@ class DeepfakeDetector(nn.Module):
         return y
 
 # LOGGING
+
 
 wandb.login(key="a446d513570a79c857317c3000584c5f6d6224f0")
 
@@ -250,7 +267,7 @@ print("Training model:")
 summary(model, input_size=(2, 3, 10, 256, 256))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 nb_epochs = 5
-#loader = DataLoader(train_dataset, batch_size=2, shuffle=True)
+# loader = DataLoader(train_dataset, batch_size=2, shuffle=True)
 loader = DataLoader(experimental_dataset, batch_size=2, shuffle=True)
 
 print("Training...")
@@ -268,7 +285,7 @@ for epoch in range(nb_epochs):
         optimizer.step()
         run.log({"loss": loss.item(), "epoch": epoch})
 """
-## TEST
+# TEST
 
 loader = DataLoader(test_dataset, batch_size=2, shuffle=False)
 model = model.to(device)
@@ -277,7 +294,7 @@ labels = []
 print("Testing...")
 for sample in tqdm(loader):
     X, ID = sample
-    #ID = ID[0]
+    # ID = ID[0]
     X = X.to(device)
     label_pred = model(X)
     ids.extend(list(ID))
@@ -285,8 +302,9 @@ for sample in tqdm(loader):
     pred = pred.cpu().detach().numpy().tolist()
     labels.extend(pred)
 
-### ENREGISTREMENT
+# ENREGISTREMENT
 print("Saving...")
-tests = ["id,label\n"] + [f"{ID},{label_pred[0]}\n" for ID, label_pred in zip(ids, labels)]
+tests = ["id,label\n"] + \
+    [f"{ID},{label_pred[0]}\n" for ID, label_pred in zip(ids, labels)]
 with open("submission.csv", "w") as file:
     file.writelines(tests)
