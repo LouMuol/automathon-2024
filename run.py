@@ -1,20 +1,19 @@
-import time
-import torch
-import torch.nn as nn
-from torch.utils.data import Dataset, DataLoader
-from torchinfo import summary
-import torchvision.io as io
-import os
-import json
-from torchvision.io.video import re
-from tqdm import tqdm
-import csv
-import timm
-import wandb
-from PIL import Image
+#!/usr/bin/env python3
 import torchvision.transforms.v2 as transforms
-!/usr/bin/env python3
-!pip install requirements.txt
+from PIL import Image
+import wandb
+import timm
+import csv
+from tqdm import tqdm
+from torchvision.io.video import re
+import json
+import os
+import torchvision.io as io
+from torchinfo import summary
+from torch.utils.data import Dataset, DataLoader
+import torch.nn as nn
+import torch
+import time
 
 
 # UTILITIES
