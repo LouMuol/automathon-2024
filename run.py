@@ -294,7 +294,7 @@ import torch.nn.functional as F
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.dense = nn.Linear(64 * 7 * 7 * 10, 1)  # Adjust the number of input features
+        self.dense = nn.Linear(32 * 7 * 7 * 10, 1)  # Adjust the number of input features
         self.layer1 = nn.Conv3d(3, 16, 3)  # Reduce the number of filters
         self.layer2 = nn.Conv3d(16, 32, 3)  # Reduce the number of filters
         self.ReLU = nn.ReLU()
