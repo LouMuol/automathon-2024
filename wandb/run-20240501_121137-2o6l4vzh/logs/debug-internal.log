@@ -1,0 +1,190 @@
+2024-05-01 12:11:37,505 INFO    StreamThr :1874091 [internal.py:wandb_internal():86] W&B internal server running at pid: 1874091, started at: 2024-05-01 12:11:37.504768
+2024-05-01 12:11:37,513 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: status
+2024-05-01 12:11:37,533 INFO    WriterThread:1874091 [datastore.py:open_for_write():87] open: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/run-2o6l4vzh.wandb
+2024-05-01 12:11:37,533 DEBUG   SenderThread:1874091 [sender.py:send():379] send: header
+2024-05-01 12:11:37,533 DEBUG   SenderThread:1874091 [sender.py:send():379] send: run
+2024-05-01 12:11:37,918 INFO    SenderThread:1874091 [dir_watcher.py:__init__():211] watching files in: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files
+2024-05-01 12:11:37,919 INFO    SenderThread:1874091 [sender.py:_start_run_threads():1124] run started: 2o6l4vzh with start time 1714558297.496283
+2024-05-01 12:11:37,937 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: check_version
+2024-05-01 12:11:37,937 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: check_version
+2024-05-01 12:11:38,070 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: run_start
+2024-05-01 12:11:38,080 DEBUG   HandlerThread:1874091 [system_info.py:__init__():26] System info init
+2024-05-01 12:11:38,080 DEBUG   HandlerThread:1874091 [system_info.py:__init__():41] System info init done
+2024-05-01 12:11:38,080 INFO    HandlerThread:1874091 [system_monitor.py:start():194] Starting system monitor
+2024-05-01 12:11:38,081 INFO    SystemMonitor:1874091 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-05-01 12:11:38,081 INFO    HandlerThread:1874091 [system_monitor.py:probe():214] Collecting system info
+2024-05-01 12:11:38,081 INFO    SystemMonitor:1874091 [interfaces.py:start():190] Started cpu monitoring
+2024-05-01 12:11:38,082 INFO    SystemMonitor:1874091 [interfaces.py:start():190] Started disk monitoring
+2024-05-01 12:11:38,082 INFO    SystemMonitor:1874091 [interfaces.py:start():190] Started gpu monitoring
+2024-05-01 12:11:38,083 INFO    SystemMonitor:1874091 [interfaces.py:start():190] Started memory monitoring
+2024-05-01 12:11:38,084 INFO    SystemMonitor:1874091 [interfaces.py:start():190] Started network monitoring
+2024-05-01 12:11:38,127 ERROR   gpu       :1874091 [interfaces.py:monitor():144] Failed to sample metric: Not Supported
+2024-05-01 12:11:38,127 ERROR   gpu       :1874091 [interfaces.py:monitor():144] Failed to sample metric: Not Supported
+2024-05-01 12:11:38,138 ERROR   gpu       :1874091 [interfaces.py:monitor():144] Failed to sample metric: Not Supported
+2024-05-01 12:11:38,146 ERROR   gpu       :1874091 [interfaces.py:monitor():144] Failed to sample metric: Not Supported
+2024-05-01 12:11:38,171 DEBUG   HandlerThread:1874091 [system_info.py:probe():150] Probing system
+2024-05-01 12:11:38,172 DEBUG   HandlerThread:1874091 [system_info.py:_probe_git():135] Probing git
+2024-05-01 12:11:38,179 DEBUG   HandlerThread:1874091 [system_info.py:_probe_git():143] Probing git done
+2024-05-01 12:11:38,179 DEBUG   HandlerThread:1874091 [system_info.py:probe():198] Probing system done
+2024-05-01 12:11:38,179 DEBUG   HandlerThread:1874091 [system_monitor.py:probe():223] {'os': 'Linux-5.4.0-153-generic-x86_64-with-glibc2.31', 'python': '3.10.13', 'heartbeatAt': '2024-05-01T10:11:38.171064', 'startedAt': '2024-05-01T10:11:37.492895', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/raid/home/automathon_2024/account13/anon/automathon-2024/run.py', 'codePathLocal': 'run.py', 'codePath': 'run.py', 'git': {'remote': 'git@github.com:LouMuol/automathon-2024.git', 'commit': '9d952cef7480b5026638ab9426600cfc60c5346b'}, 'email': None, 'root': '/raid/home/automathon_2024/account13/anon/automathon-2024', 'host': 'dgxa100', 'username': 'account13', 'executable': '/usr/bin/python', 'cpu_count': 64, 'cpu_count_logical': 128, 'cpu_freq': {'current': 3217.0333749999995, 'min': 1500.0, 'max': 2250.0}, 'cpu_freq_per_core': [{'current': 3215.105, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.955, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.049, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.792, 'min': 1500.0, 'max': 2250.0}, {'current': 3213.075, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.681, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.359, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.753, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.903, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.09, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.791, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.013, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.531, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.664, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.342, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.05, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.273, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.484, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.452, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.428, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.856, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.402, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.606, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.698, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.978, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.156, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.754, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.911, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.59, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.512, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.505, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.557, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.572, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.082, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.952, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.457, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.518, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.507, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.452, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.509, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.117, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.098, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.054, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.947, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.58, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.39, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.498, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.418, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.336, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.338, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.405, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.341, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.727, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.834, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.789, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.834, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.09, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.118, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.136, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.96, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.612, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.603, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.609, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.599, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.347, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.35, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.529, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.323, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.48, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.645, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.678, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.044, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.979, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.168, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.913, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.154, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.969, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.745, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.69, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.604, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.465, 'min': 1500.0, 'max': 2250.0}, {'current': 3214.846, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.645, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.621, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.882, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.719, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.624, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.814, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.158, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.173, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.942, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.103, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.525, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.711, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.619, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.544, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.847, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.113, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.984, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.508, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.559, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.503, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.494, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.553, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.152, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.137, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.09, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.98, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.62, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.432, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.538, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.462, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.336, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.383, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.456, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.392, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.787, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.892, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.851, 'min': 1500.0, 'max': 2250.0}, {'current': 3215.898, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.125, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.111, 'min': 1500.0, 'max': 2250.0}, {'current': 3217.176, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.993, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.66, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.654, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.661, 'min': 1500.0, 'max': 2250.0}, {'current': 3216.652, 'min': 1500.0, 'max': 2250.0}], 'disk': {'/': {'total': 1757.8785285949707, 'used': 378.6347770690918}}, 'gpu': 'NVIDIA A100-SXM4-80GB', 'gpu_count': 5, 'gpu_devices': [{'name': 'NVIDIA A100-SXM4-80GB', 'memory_total': 85899345920}, {'name': 'NVIDIA A100-SXM4-80GB', 'memory_total': 85899345920}, {'name': 'NVIDIA A100-SXM4-80GB', 'memory_total': 85899345920}, {'name': 'NVIDIA DGX Display', 'memory_total': 4294967296}, {'name': 'NVIDIA A100-SXM4-80GB', 'memory_total': 85899345920}], 'memory': {'total': 503.7273750305176}}
+2024-05-01 12:11:38,179 INFO    HandlerThread:1874091 [system_monitor.py:probe():224] Finished collecting system info
+2024-05-01 12:11:38,179 INFO    HandlerThread:1874091 [system_monitor.py:probe():227] Publishing system info
+2024-05-01 12:11:38,181 INFO    HandlerThread:1874091 [system_monitor.py:probe():229] Finished publishing system info
+2024-05-01 12:11:38,190 DEBUG   SenderThread:1874091 [sender.py:send():379] send: files
+2024-05-01 12:11:38,190 INFO    SenderThread:1874091 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2024-05-01 12:11:38,366 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: python_packages
+2024-05-01 12:11:38,370 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: stop_status
+2024-05-01 12:11:38,370 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-01 12:11:38,371 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: python_packages
+2024-05-01 12:11:38,371 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: stop_status
+2024-05-01 12:11:38,620 DEBUG   SenderThread:1874091 [sender.py:send():379] send: telemetry
+2024-05-01 12:11:38,752 INFO    wandb-upload_0:1874091 [upload_job.py:push():131] Uploaded file /tmp/tmpdqry6g4xwandb/y9yw2co4-wandb-metadata.json
+2024-05-01 12:11:38,930 INFO    Thread-12 :1874091 [dir_watcher.py:_on_file_created():271] file/dir created: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/requirements.txt
+2024-05-01 12:11:38,931 INFO    Thread-12 :1874091 [dir_watcher.py:_on_file_created():271] file/dir created: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/wandb-metadata.json
+2024-05-01 12:11:40,148 ERROR   gpu       :1874091 [interfaces.py:monitor():144] Failed to sample metric: Not Supported
+2024-05-01 12:11:40,149 ERROR   gpu       :1874091 [interfaces.py:monitor():144] Failed to sample metric: Not Supported
+2024-05-01 12:11:40,157 ERROR   gpu       :1874091 [interfaces.py:monitor():144] Failed to sample metric: Not Supported
+2024-05-01 12:11:40,171 ERROR   gpu       :1874091 [interfaces.py:monitor():144] Failed to sample metric: Not Supported
+2024-05-01 12:11:41,928 INFO    Thread-12 :1874091 [dir_watcher.py:_on_file_created():271] file/dir created: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/output.log
+2024-05-01 12:11:41,971 DEBUG   SenderThread:1874091 [sender.py:send():379] send: exit
+2024-05-01 12:11:41,971 INFO    SenderThread:1874091 [sender.py:send_exit():586] handling exit code: 1
+2024-05-01 12:11:41,971 INFO    SenderThread:1874091 [sender.py:send_exit():588] handling runtime: 3
+2024-05-01 12:11:41,973 INFO    SenderThread:1874091 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-05-01 12:11:41,973 INFO    SenderThread:1874091 [sender.py:send_exit():594] send defer
+2024-05-01 12:11:41,973 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:41,973 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 0
+2024-05-01 12:11:41,973 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:41,973 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-05-01 12:11:41,973 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 1
+2024-05-01 12:11:41,974 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:41,974 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 1
+2024-05-01 12:11:41,974 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:41,974 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-05-01 12:11:41,974 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 2
+2024-05-01 12:11:41,974 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:41,974 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 2
+2024-05-01 12:11:41,974 INFO    HandlerThread:1874091 [system_monitor.py:finish():203] Stopping system monitor
+2024-05-01 12:11:41,974 DEBUG   SystemMonitor:1874091 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-05-01 12:11:41,975 DEBUG   SystemMonitor:1874091 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-05-01 12:11:41,975 INFO    HandlerThread:1874091 [interfaces.py:finish():202] Joined cpu monitor
+2024-05-01 12:11:41,975 DEBUG   SystemMonitor:1874091 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-05-01 12:11:41,975 INFO    HandlerThread:1874091 [interfaces.py:finish():202] Joined disk monitor
+2024-05-01 12:11:42,738 ERROR   gpu       :1874091 [interfaces.py:aggregate():161] Failed to serialize metric: division by zero
+2024-05-01 12:11:42,738 INFO    HandlerThread:1874091 [interfaces.py:finish():202] Joined gpu monitor
+2024-05-01 12:11:42,738 INFO    HandlerThread:1874091 [interfaces.py:finish():202] Joined memory monitor
+2024-05-01 12:11:42,739 INFO    HandlerThread:1874091 [interfaces.py:finish():202] Joined network monitor
+2024-05-01 12:11:42,739 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:42,739 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-05-01 12:11:42,739 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 3
+2024-05-01 12:11:42,739 DEBUG   SenderThread:1874091 [sender.py:send():379] send: stats
+2024-05-01 12:11:42,739 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:42,740 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 3
+2024-05-01 12:11:42,740 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: status_report
+2024-05-01 12:11:42,740 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:42,740 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-05-01 12:11:42,740 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 4
+2024-05-01 12:11:42,740 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:42,741 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 4
+2024-05-01 12:11:42,741 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:42,741 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-05-01 12:11:42,741 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 5
+2024-05-01 12:11:42,741 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:42,741 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 5
+2024-05-01 12:11:42,741 DEBUG   SenderThread:1874091 [sender.py:send():379] send: summary
+2024-05-01 12:11:42,741 INFO    SenderThread:1874091 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-05-01 12:11:42,742 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:42,742 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-05-01 12:11:42,742 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 6
+2024-05-01 12:11:42,742 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:42,742 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 6
+2024-05-01 12:11:42,742 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:42,742 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-05-01 12:11:42,746 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: status_report
+2024-05-01 12:11:42,897 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 7
+2024-05-01 12:11:42,898 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:42,898 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 7
+2024-05-01 12:11:42,898 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:42,898 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-05-01 12:11:42,928 INFO    Thread-12 :1874091 [dir_watcher.py:_on_file_modified():288] file/dir modified: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/config.yaml
+2024-05-01 12:11:42,928 INFO    Thread-12 :1874091 [dir_watcher.py:_on_file_created():271] file/dir created: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/wandb-summary.json
+2024-05-01 12:11:42,971 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: poll_exit
+2024-05-01 12:11:43,930 INFO    Thread-12 :1874091 [dir_watcher.py:_on_file_modified():288] file/dir modified: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/output.log
+2024-05-01 12:11:43,981 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 8
+2024-05-01 12:11:43,981 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: poll_exit
+2024-05-01 12:11:43,981 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:43,981 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 8
+2024-05-01 12:11:43,981 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:43,981 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-05-01 12:11:43,981 INFO    SenderThread:1874091 [job_builder.py:build():318] Attempting to build job artifact
+2024-05-01 12:11:43,982 INFO    SenderThread:1874091 [job_builder.py:_get_source_type():455] is repo sourced job
+2024-05-01 12:11:44,000 INFO    SenderThread:1874091 [job_builder.py:build():431] adding wandb-job metadata file
+2024-05-01 12:11:44,007 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 9
+2024-05-01 12:11:44,007 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:44,007 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 9
+2024-05-01 12:11:44,008 DEBUG   SenderThread:1874091 [sender.py:send():379] send: artifact
+2024-05-01 12:11:44,802 INFO    SenderThread:1874091 [sender.py:send_artifact():1468] sent artifact job-git_github.com_LouMuol_automathon-2024.git_run.py - {'id': 'QXJ0aWZhY3Q6ODE2OTk1MTAy', 'state': 'COMMITTED', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjE2ODkzMzUwMw==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6ODE2OTk1MTAy', 'versionIndex': 55}}}
+2024-05-01 12:11:44,808 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:44,811 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-05-01 12:11:44,813 INFO    SenderThread:1874091 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-05-01 12:11:44,931 INFO    Thread-12 :1874091 [dir_watcher.py:_on_file_modified():288] file/dir modified: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/output.log
+2024-05-01 12:11:44,942 INFO    SenderThread:1874091 [dir_watcher.py:finish():388] scan: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files
+2024-05-01 12:11:44,943 INFO    SenderThread:1874091 [dir_watcher.py:finish():402] scan save: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/wandb-metadata.json wandb-metadata.json
+2024-05-01 12:11:44,943 INFO    SenderThread:1874091 [dir_watcher.py:finish():402] scan save: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/wandb-summary.json wandb-summary.json
+2024-05-01 12:11:44,943 INFO    SenderThread:1874091 [dir_watcher.py:finish():402] scan save: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/output.log output.log
+2024-05-01 12:11:44,943 INFO    SenderThread:1874091 [dir_watcher.py:finish():402] scan save: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/requirements.txt requirements.txt
+2024-05-01 12:11:44,944 INFO    SenderThread:1874091 [dir_watcher.py:finish():402] scan save: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/config.yaml config.yaml
+2024-05-01 12:11:44,944 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 10
+2024-05-01 12:11:44,944 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:44,944 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 10
+2024-05-01 12:11:44,945 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:44,945 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-05-01 12:11:44,945 INFO    SenderThread:1874091 [file_pusher.py:finish():172] shutting down file pusher
+2024-05-01 12:11:44,972 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: poll_exit
+2024-05-01 12:11:44,972 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: poll_exit
+2024-05-01 12:11:45,297 INFO    wandb-upload_2:1874091 [upload_job.py:push():131] Uploaded file /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/requirements.txt
+2024-05-01 12:11:45,326 INFO    wandb-upload_1:1874091 [upload_job.py:push():131] Uploaded file /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/wandb-summary.json
+2024-05-01 12:11:45,369 INFO    wandb-upload_0:1874091 [upload_job.py:push():131] Uploaded file /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/output.log
+2024-05-01 12:11:45,384 INFO    wandb-upload_3:1874091 [upload_job.py:push():131] Uploaded file /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/files/config.yaml
+2024-05-01 12:11:45,588 INFO    Thread-11 (_thread_body):1874091 [sender.py:transition_state():614] send defer: 11
+2024-05-01 12:11:45,590 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:45,590 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 11
+2024-05-01 12:11:45,592 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:45,592 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-05-01 12:11:45,592 INFO    SenderThread:1874091 [file_pusher.py:join():178] waiting for file pusher
+2024-05-01 12:11:45,593 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 12
+2024-05-01 12:11:45,594 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:45,594 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 12
+2024-05-01 12:11:45,594 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:45,594 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-05-01 12:11:45,594 INFO    SenderThread:1874091 [file_stream.py:finish():614] file stream finish called
+2024-05-01 12:11:45,729 INFO    SenderThread:1874091 [file_stream.py:finish():618] file stream finish is done
+2024-05-01 12:11:45,729 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 13
+2024-05-01 12:11:45,730 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:45,730 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 13
+2024-05-01 12:11:45,730 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:45,730 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-05-01 12:11:45,730 INFO    SenderThread:1874091 [sender.py:transition_state():614] send defer: 14
+2024-05-01 12:11:45,730 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: defer
+2024-05-01 12:11:45,731 INFO    HandlerThread:1874091 [handler.py:handle_request_defer():172] handle defer: 14
+2024-05-01 12:11:45,731 DEBUG   SenderThread:1874091 [sender.py:send():379] send: final
+2024-05-01 12:11:45,731 DEBUG   SenderThread:1874091 [sender.py:send():379] send: footer
+2024-05-01 12:11:45,731 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: defer
+2024-05-01 12:11:45,731 INFO    SenderThread:1874091 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-05-01 12:11:45,732 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: poll_exit
+2024-05-01 12:11:45,732 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: poll_exit
+2024-05-01 12:11:45,732 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: poll_exit
+2024-05-01 12:11:45,733 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: poll_exit
+2024-05-01 12:11:45,733 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: server_info
+2024-05-01 12:11:45,733 DEBUG   SenderThread:1874091 [sender.py:send_request():406] send_request: server_info
+2024-05-01 12:11:45,735 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: get_summary
+2024-05-01 12:11:45,736 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: sampled_history
+2024-05-01 12:11:45,736 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: internal_messages
+2024-05-01 12:11:45,866 INFO    MainThread:1874091 [wandb_run.py:_footer_history_summary_info():3936] rendering history
+2024-05-01 12:11:45,867 INFO    MainThread:1874091 [wandb_run.py:_footer_history_summary_info():3968] rendering summary
+2024-05-01 12:11:45,867 INFO    MainThread:1874091 [wandb_run.py:_footer_sync_info():3895] logging synced files
+2024-05-01 12:11:45,868 DEBUG   HandlerThread:1874091 [handler.py:handle_request():146] handle_request: shutdown
+2024-05-01 12:11:45,868 INFO    HandlerThread:1874091 [handler.py:finish():866] shutting down handler
+2024-05-01 12:11:46,734 INFO    WriterThread:1874091 [datastore.py:close():296] close: /raid/home/automathon_2024/account13/anon/automathon-2024/wandb/run-20240501_121137-2o6l4vzh/run-2o6l4vzh.wandb
+2024-05-01 12:11:46,860 INFO    SenderThread:1874091 [sender.py:finish():1546] shutting down sender
+2024-05-01 12:11:46,860 INFO    SenderThread:1874091 [file_pusher.py:finish():172] shutting down file pusher
+2024-05-01 12:11:46,860 INFO    SenderThread:1874091 [file_pusher.py:join():178] waiting for file pusher
