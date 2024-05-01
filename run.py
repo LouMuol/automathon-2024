@@ -243,7 +243,7 @@ for p in encoder.parameters():
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.flatten = nn.Flatten(1, 2)
+        self.flatten = nn.Flatten(0, 1)
         self.encoder = encoder
         self.dense = nn.Linear(1000, 1)
         self.flat = nn.Flatten()
