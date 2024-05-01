@@ -292,6 +292,7 @@ loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
 print("Training...")
 for epoch in range(epochs):
+    print(f"Epoch {epoch}")
     for sample in tqdm(loader):
         optimizer.zero_grad()
         X, label, ID = sample
