@@ -250,6 +250,7 @@ class DeepfakeDetector(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
+        x = x.permute(0, 2, 1, 3, 4)
         y = self.flatten(x)
         y = self.encoder(y)
         y = self.flat(y)
