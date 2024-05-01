@@ -281,7 +281,6 @@ preprocess = transforms.Compose([
         std=[0.229, 0.224, 0.225]     # Std de ImageNet
     )
 ])
-
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
@@ -289,10 +288,18 @@ class DeepfakeDetector(nn.Module):
         # Modifier la sortie d'EfficientNet pour correspondre à l'entrée attendue par votre modèle
         self.fc = nn.Linear(self.efficient.num_features, 1)
         self.sigmoid = nn.Sigmoid()
+        self.preprocess = transforms.Compose([
+            transforms.Resize((224, 224)),  # Redimensionner à la taille 224x224
+            transforms.ToTensor(),           # Convertir l'image en tenseur
+            transforms.Normalize(            # Normaliser les valeurs de pixel
+                mean=[0.485, 0.456, 0.406],  # Mean de ImageNet
+                std=[0.229, 0.224, 0.225]     # Std de ImageNet
+            )
+        ])
 
     def forward(self, x):
         # Prétraiter les données pour les adapter à EfficientNet
-        x = self.preprocess_input(x)  # Adapter à la taille attendue (224x224)
+        x = self.preprocess(x)  # Adapter à la taille attendue (224x224)
         # Appliquer EfficientNet pour extraire les caractéristiques
         features = self.efficient(x)
         # Passer les caractéristiques extraites à travers une couche linéaire
@@ -300,7 +307,6 @@ class DeepfakeDetector(nn.Module):
         # Appliquer la fonction d'activation sigmoid pour obtenir des probabilités
         output = self.sigmoid(output)
         return output
-
 
 # LOGGING
 
