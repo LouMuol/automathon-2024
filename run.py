@@ -235,7 +235,10 @@ experimental_dataset = VideoDataset(
 
 
 # MODELE
-
+from timm import create_model
+model2 = create_model('efficientnet_b0', pretrained=True)
+for p in model2.parameters():
+    p.requires_grad = False
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
@@ -274,7 +277,8 @@ run = wandb.init(
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 batch_size = 32
 loss_fn = nn.MSELoss()
-model = DeepfakeDetector().to(device)
+#model = DeepfakeDetector().to(device)
+model = model2
 print("Training model:")
 summary(model, input_size=(batch_size, 3, 10, 256, 256))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
@@ -283,7 +287,6 @@ loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 # loader = DataLoader(experimental_dataset, batch_size=2, shuffle=True)
 
 print("Training...")
-print("2eme test")
 for epoch in range(epochs):
     for sample in tqdm(loader):
         optimizer.zero_grad()
