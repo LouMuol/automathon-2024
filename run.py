@@ -244,6 +244,7 @@ class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
         self.flatten = nn.Flatten(0, 1)
+        self.unflatten = nn.Unflatten(0, (nb_frames, 3, 256, 256))
         self.encoder = encoder
         self.dense = nn.Linear(1000, 1)
         self.flat = nn.Flatten()
@@ -257,10 +258,10 @@ class DeepfakeDetector(nn.Module):
                 print(x.shape)
         y = self.flatten(x)
         y = self.encoder(y)
+        y = self.unflatten(y)
         y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
-        x = torch.unsqueeze(y, dim=2)
         return x
 
 # LOGGING
@@ -275,12 +276,12 @@ run = wandb.init(
 # ENTRAINEMENT
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using {device}")
 batch_size = 32
 loss_fn = nn.MSELoss()
 model = DeepfakeDetector().to(device)
 print("Training model:")
 summary(model, input_size=(batch_size, 3, 10, 256, 256))
-summary(encoder, input_size=(batch_size, 3, 256, 256))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 epochs = 5
 loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
