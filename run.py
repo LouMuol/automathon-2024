@@ -248,6 +248,7 @@ class DeepfakeDetector(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
+        y = x
         y = self.layer1(y)
         y = self.ReLU(y)
         y = self.pool(y)
