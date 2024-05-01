@@ -235,7 +235,7 @@ experimental_dataset = VideoDataset(
 
 
 # MODELE
-encoder = timm.create_model("I3D", pretrained=True)
+encoder = timm.create_model("resnet18", pretrained=True)
 for p in encoder.parameters():
     p.requires_grad = False
 
@@ -243,18 +243,20 @@ for p in encoder.parameters():
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.nb_frames = nb_frames
+        self.flatten = nn.Flatten(1, 2)
         self.encoder = encoder
         self.dense = nn.Linear(1000, 1)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        y = self.encoder(x)
+        y = self.flatten(x)
+        y = self.encoder(y)
         y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
-        return y
+        x = torch.stack(x, dim=2)
+        return x
 
 # LOGGING
 
