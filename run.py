@@ -260,9 +260,9 @@ class DeepfakeDetector(nn.Module):
                 print(x.shape)
         y = self.flatten(x)
         y = self.encoder(y)
-        if y.shape[0] == 32:
+        if y.shape[0] == 320:
             y = self.unflatten32(y)
-        elif y.shape[0] == 26:
+        elif y.shape[0] == 260:
             y = self.unflatten26(y)
         else:
             print(y.shape)
