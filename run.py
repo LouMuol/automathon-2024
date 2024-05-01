@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import random
 import torchvision.transforms.v2 as transforms
 from PIL import Image
 import wandb
@@ -261,13 +260,9 @@ class DeepfakeDetector(nn.Module):
         y = self.sigmoid(y)
         return y
 
-# LOGGING
-
-
-wandb.login(key="fd4c3f7c9a913db806013830b309ac1496b0f0d4")
 
 # start a new wandb run to track this script
-wandb.init(
+run = wandb.init(
     # set the wandb project where this run will be logged
     project="lanAxeS",
 
@@ -289,9 +284,6 @@ for epoch in range(2, epochs):
 
     # log metrics to wandb
     wandb.log({"acc": acc, "loss": loss})
-
-# [optional] finish the wandb run, necessary in notebooks
-wandb.finish()
 
 # ENTRAINEMENT
 
