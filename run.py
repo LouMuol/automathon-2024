@@ -235,7 +235,7 @@ experimental_dataset = VideoDataset(
 
 
 # MODELE
-encoder = timm.create_model("C3D", pretrained=True)
+encoder = timm.create_model("I3D", pretrained=True)
 for p in encoder.parameters():
     p.requires_grad = False
 
