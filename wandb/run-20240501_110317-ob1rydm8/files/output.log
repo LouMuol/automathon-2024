@@ -1,0 +1,142 @@
+
+Training model:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+DeepfakeDetector                         [32, 1]                   --
+├─Conv3d: 1-1                            [32, 32, 8, 254, 254]     2,624
+├─ReLU: 1-2                              [32, 32, 8, 254, 254]     --
+├─MaxPool3d: 1-3                         [32, 32, 4, 127, 127]     --
+├─Conv3d: 1-4                            [32, 64, 2, 125, 125]     55,360
+├─ReLU: 1-5                              [32, 64, 2, 125, 125]     --
+├─MaxPool3d: 1-6                         [32, 64, 1, 62, 62]       --
+├─Flatten: 1-7                           [32, 246016]              --
+├─Linear: 1-8                            [32, 1]                   246,017
+├─Sigmoid: 1-9                           [32, 1]                   --
+==========================================================================================
+Total params: 304,001
+Trainable params: 304,001
+Non-trainable params: 0
+Total mult-adds (G): 98.71
+==========================================================================================
+Input size (MB): 251.66
+Forward/backward pass size (MB): 4740.12
+Params size (MB): 1.22
+Estimated Total Size (MB): 4993.00
+==========================================================================================
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+ResNet                                   [32, 1000]                --
+├─Conv2d: 1-1                            [32, 64, 128, 128]        (9,408)
+├─BatchNorm2d: 1-2                       [32, 64, 128, 128]        (128)
+├─ReLU: 1-3                              [32, 64, 128, 128]        --
+├─MaxPool2d: 1-4                         [32, 64, 64, 64]          --
+├─Sequential: 1-5                        [32, 64, 64, 64]          --
+│    └─BasicBlock: 2-1                   [32, 64, 64, 64]          --
+│    │    └─Conv2d: 3-1                  [32, 64, 64, 64]          (36,864)
+│    │    └─BatchNorm2d: 3-2             [32, 64, 64, 64]          (128)
+│    │    └─Identity: 3-3                [32, 64, 64, 64]          --
+│    │    └─ReLU: 3-4                    [32, 64, 64, 64]          --
+│    │    └─Identity: 3-5                [32, 64, 64, 64]          --
+│    │    └─Conv2d: 3-6                  [32, 64, 64, 64]          (36,864)
+│    │    └─BatchNorm2d: 3-7             [32, 64, 64, 64]          (128)
+│    │    └─ReLU: 3-8                    [32, 64, 64, 64]          --
+│    └─BasicBlock: 2-2                   [32, 64, 64, 64]          --
+│    │    └─Conv2d: 3-9                  [32, 64, 64, 64]          (36,864)
+│    │    └─BatchNorm2d: 3-10            [32, 64, 64, 64]          (128)
+│    │    └─Identity: 3-11               [32, 64, 64, 64]          --
+│    │    └─ReLU: 3-12                   [32, 64, 64, 64]          --
+│    │    └─Identity: 3-13               [32, 64, 64, 64]          --
+│    │    └─Conv2d: 3-14                 [32, 64, 64, 64]          (36,864)
+│    │    └─BatchNorm2d: 3-15            [32, 64, 64, 64]          (128)
+│    │    └─ReLU: 3-16                   [32, 64, 64, 64]          --
+├─Sequential: 1-6                        [32, 128, 32, 32]         --
+│    └─BasicBlock: 2-3                   [32, 128, 32, 32]         --
+│    │    └─Conv2d: 3-17                 [32, 128, 32, 32]         (73,728)
+│    │    └─BatchNorm2d: 3-18            [32, 128, 32, 32]         (256)
+│    │    └─Identity: 3-19               [32, 128, 32, 32]         --
+│    │    └─ReLU: 3-20                   [32, 128, 32, 32]         --
+│    │    └─Identity: 3-21               [32, 128, 32, 32]         --
+│    │    └─Conv2d: 3-22                 [32, 128, 32, 32]         (147,456)
+│    │    └─BatchNorm2d: 3-23            [32, 128, 32, 32]         (256)
+│    │    └─Sequential: 3-24             [32, 128, 32, 32]         (8,448)
+│    │    └─ReLU: 3-25                   [32, 128, 32, 32]         --
+│    └─BasicBlock: 2-4                   [32, 128, 32, 32]         --
+│    │    └─Conv2d: 3-26                 [32, 128, 32, 32]         (147,456)
+│    │    └─BatchNorm2d: 3-27            [32, 128, 32, 32]         (256)
+│    │    └─Identity: 3-28               [32, 128, 32, 32]         --
+│    │    └─ReLU: 3-29                   [32, 128, 32, 32]         --
+│    │    └─Identity: 3-30               [32, 128, 32, 32]         --
+│    │    └─Conv2d: 3-31                 [32, 128, 32, 32]         (147,456)
+│    │    └─BatchNorm2d: 3-32            [32, 128, 32, 32]         (256)
+│    │    └─ReLU: 3-33                   [32, 128, 32, 32]         --
+├─Sequential: 1-7                        [32, 256, 16, 16]         --
+│    └─BasicBlock: 2-5                   [32, 256, 16, 16]         --
+│    │    └─Conv2d: 3-34                 [32, 256, 16, 16]         (294,912)
+│    │    └─BatchNorm2d: 3-35            [32, 256, 16, 16]         (512)
+│    │    └─Identity: 3-36               [32, 256, 16, 16]         --
+│    │    └─ReLU: 3-37                   [32, 256, 16, 16]         --
+│    │    └─Identity: 3-38               [32, 256, 16, 16]         --
+│    │    └─Conv2d: 3-39                 [32, 256, 16, 16]         (589,824)
+│    │    └─BatchNorm2d: 3-40            [32, 256, 16, 16]         (512)
+│    │    └─Sequential: 3-41             [32, 256, 16, 16]         (33,280)
+│    │    └─ReLU: 3-42                   [32, 256, 16, 16]         --
+│    └─BasicBlock: 2-6                   [32, 256, 16, 16]         --
+│    │    └─Conv2d: 3-43                 [32, 256, 16, 16]         (589,824)
+│    │    └─BatchNorm2d: 3-44            [32, 256, 16, 16]         (512)
+│    │    └─Identity: 3-45               [32, 256, 16, 16]         --
+│    │    └─ReLU: 3-46                   [32, 256, 16, 16]         --
+│    │    └─Identity: 3-47               [32, 256, 16, 16]         --
+│    │    └─Conv2d: 3-48                 [32, 256, 16, 16]         (589,824)
+│    │    └─BatchNorm2d: 3-49            [32, 256, 16, 16]         (512)
+│    │    └─ReLU: 3-50                   [32, 256, 16, 16]         --
+├─Sequential: 1-8                        [32, 512, 8, 8]           --
+│    └─BasicBlock: 2-7                   [32, 512, 8, 8]           --
+│    │    └─Conv2d: 3-51                 [32, 512, 8, 8]           (1,179,648)
+│    │    └─BatchNorm2d: 3-52            [32, 512, 8, 8]           (1,024)
+│    │    └─Identity: 3-53               [32, 512, 8, 8]           --
+│    │    └─ReLU: 3-54                   [32, 512, 8, 8]           --
+│    │    └─Identity: 3-55               [32, 512, 8, 8]           --
+│    │    └─Conv2d: 3-56                 [32, 512, 8, 8]           (2,359,296)
+│    │    └─BatchNorm2d: 3-57            [32, 512, 8, 8]           (1,024)
+│    │    └─Sequential: 3-58             [32, 512, 8, 8]           (132,096)
+│    │    └─ReLU: 3-59                   [32, 512, 8, 8]           --
+│    └─BasicBlock: 2-8                   [32, 512, 8, 8]           --
+│    │    └─Conv2d: 3-60                 [32, 512, 8, 8]           (2,359,296)
+│    │    └─BatchNorm2d: 3-61            [32, 512, 8, 8]           (1,024)
+│    │    └─Identity: 3-62               [32, 512, 8, 8]           --
+│    │    └─ReLU: 3-63                   [32, 512, 8, 8]           --
+│    │    └─Identity: 3-64               [32, 512, 8, 8]           --
+│    │    └─Conv2d: 3-65                 [32, 512, 8, 8]           (2,359,296)
+│    │    └─BatchNorm2d: 3-66            [32, 512, 8, 8]           (1,024)
+│    │    └─ReLU: 3-67                   [32, 512, 8, 8]           --
+├─SelectAdaptivePool2d: 1-9              [32, 512]                 --
+│    └─AdaptiveAvgPool2d: 2-9            [32, 512, 1, 1]           --
+│    └─Flatten: 2-10                     [32, 512]                 --
+├─Linear: 1-10                           [32, 1000]                (513,000)
+==========================================================================================
+Total params: 11,689,512
+Trainable params: 0
+Non-trainable params: 11,689,512
+Total mult-adds (G): 75.82
+==========================================================================================
+Input size (MB): 25.17
+Forward/backward pass size (MB): 1661.20
+Params size (MB): 46.76
+Estimated Total Size (MB): 1733.12
+==========================================================================================
+Training...
+/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/nn/modules/conv.py:605: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return F.conv3d(
+  0%|          | 1/310 [00:01<05:20,  1.04s/it]
+Traceback (most recent call last):
+  File "/raid/home/automathon_2024/account13/anon/automathon-2024/run.py", line 300, in <module>
+    loss.backward()
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/_tensor.py", line 525, in backward
+    torch.autograd.backward(
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/autograd/__init__.py", line 267, in backward
+    _engine_run_backward(
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/autograd/graph.py", line 744, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.97 GiB. GPU
