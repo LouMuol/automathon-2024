@@ -88,7 +88,7 @@ def resize_data(data, new_height, new_width, x=0, y=0, height=None, width=None):
 
 # SETUP DATASET
 
-dataset_dir = "../anon/automathon-2024/"
+dataset_dir = "/automathon-2024/"
 root_dir = os.path.expanduser("~/automathon-2024")
 nb_frames = 10
 
