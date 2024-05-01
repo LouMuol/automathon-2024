@@ -250,13 +250,18 @@ class DeepfakeDetector(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        if len(x.shape) == 5:
-            x = x.reshape(batch_size, 3*self.nb_frames, 256, 256)
+        if len(x.shape) == (batch_size, 3, self.nb_frames, 256, 256):
+            x = x.reshape(batch_size, self.nb_frames, 3, 256, 256)
+        for i in range(self.nb_frames):
+            y = self.encoder(x[:, i])
+            y = y.unsqueeze(1) if i == 0 else torch.cat(
+                (y.unsqueeze(1), y.unsqueeze(1)), 1)
         y = self.encoder(x)
         y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
-        return y
+        x = torch.stack(x, dim=1)
+        return x
 
 # LOGGING
 
@@ -275,7 +280,7 @@ loss_fn = nn.MSELoss()
 model = DeepfakeDetector().to(device)
 print("Training model:")
 summary(model, input_size=(batch_size, 3, 10, 256, 256))
-summary(encoder, input_size=(batch_size, 3*10, 256, 256))
+summary(encoder, input_size=(batch_size, 3, 256, 256))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 epochs = 5
 loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
