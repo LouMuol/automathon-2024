@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import random
 import torchvision.transforms.v2 as transforms
 from PIL import Image
 import wandb
@@ -263,15 +264,39 @@ class DeepfakeDetector(nn.Module):
 # LOGGING
 
 
-wandb.login(key="a446d513570a79c857317c3000584c5f6d6224f0")
+wandb.login(key="fd4c3f7c9a913db806013830b309ac1496b0f0d4")
 
-run = wandb.init(
-    project="automathon"
+# start a new wandb run to track this script
+wandb.init(
+    # set the wandb project where this run will be logged
+    project="lanAxeS",
+
+    # track hyperparameters and run metadata
+    config={
+        "learning_rate": 0.02,
+        "architecture": "CNN",
+        "dataset": "CIFAR-100",
+        "epochs": 10,
+    }
 )
+
+# simulate training
+epochs = 10
+offset = random.random() / 5
+for epoch in range(2, epochs):
+    acc = 1 - 2 ** -epoch - random.random() / epoch - offset
+    loss = 2 ** -epoch + random.random() / epoch + offset
+
+    # log metrics to wandb
+    wandb.log({"acc": acc, "loss": loss})
+
+# [optional] finish the wandb run, necessary in notebooks
+wandb.finish()
 
 # ENTRAINEMENT
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using {device}")
 batch_size = 32
 loss_fn = nn.MSELoss()
 model = DeepfakeDetector().to(device)
