@@ -239,7 +239,7 @@ encoder = timm.create_model("efficientnet_b0", pretrained=True)
 for p in encoder.parameters():
     p.requires_grad = False
 
-summary(model, input_size=(batch_size, 3, 256, 256))
+summary(encoder, input_size=(32, 3, 256, 256))
 
 
 class DeepfakeDetector(nn.Module):
