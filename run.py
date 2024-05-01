@@ -265,8 +265,8 @@ class DeepfakeDetector(nn.Module):
             Ly.append(y)
         Y = torch.stack(Ly, 1)
         print(Y.shape)
-        Y = self.dense2(Y)
         Y = Y.squeeze(2)
+        Y = self.dense2(Y)
         Y = self.sigmoid(Y)
         return Y
 
