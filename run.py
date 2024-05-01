@@ -236,7 +236,7 @@ experimental_dataset = VideoDataset(
 
 # MODELE
 from timm import create_model
-efficient = create_model('efficientnet_b0', pretrained=True)
+efficient = create_model('efficientnet_b1', pretrained=True)
 for p in efficient.parameters():
     p.requires_grad = False
 class DeepfakeDetector(nn.Module):
