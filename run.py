@@ -290,26 +290,26 @@ preprocess = transforms.Compose([
 import torch.nn.functional as F
 
 
-
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.dense = nn.Linear(32 * 7 * 7 * 10, 1)  # Adjust the number of input features
-        self.layer1 = nn.Conv3d(3, 16, 3)  # Reduce the number of filters
-        self.layer2 = nn.Conv3d(16, 32, 3)  # Reduce the number of filters
+        self.layer1 = nn.Conv3d(3, 32, 3)
+        self.layer2 = nn.Conv3d(32, 64, 3)
         self.ReLU = nn.ReLU()
         self.pool = nn.MaxPool3d(2)
-        self.flat = nn.Flatten()
+        self.flat_features = 64 * 3 * 10 * 32  # Calcul du nombre de features en sortie des couches convolutives
+        self.dense = nn.Linear(self.flat_features, 1)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        y = self.layer1(x)
+        y = x.reshape(x.size(0), 3, 10, 256, 256)
+        y = self.layer1(y)
         y = self.ReLU(y)
         y = self.pool(y)
         y = self.layer2(y)
         y = self.ReLU(y)
         y = self.pool(y)
-        y = self.flat(y)
+        y = y.view(-1, self.flat_features)  # Aplatir les features pour les passer à la couche linéaire
         y = self.dense(y)
         y = self.sigmoid(y)
         return y
