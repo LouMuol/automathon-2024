@@ -251,8 +251,10 @@ class DeepfakeDetector(nn.Module):
 
     def forward(self, x):
         if x.shape != (32, 3, 10, 256, 256):
-            print(x.shape)
-        x = x.permute(0, 2, 1, 3, 4)
+            x = x.permute(0, 2, 1, 3, 4)
+            if x.shape != (32, 10, 3, 256, 256):
+                x = x.permute(0, 2, 1, 3, 4)
+                print(x.shape)
         y = self.flatten(x)
         y = self.encoder(y)
         y = self.flat(y)
