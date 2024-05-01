@@ -246,7 +246,8 @@ class DeepfakeDetector(nn.Module):
         super().__init__()
         self.flatten = nn.Flatten(0, 1)
         self.encoder = encoder
-        self.unflatten = nn.Unflatten(0, (batch_size, nb_frames))
+        self.unflatten32 = nn.Unflatten(0, (batch_size, nb_frames))
+        self.unflatten26 = nn.Unflatten(0, (26, nb_frames))
         self.dense = nn.Linear(10000, 1)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
@@ -259,7 +260,10 @@ class DeepfakeDetector(nn.Module):
                 print(x.shape)
         y = self.flatten(x)
         y = self.encoder(y)
-        y = self.unflatten(y)
+        if y.shape[0] == 32:
+            y = self.unflatten(y)
+        else:
+            y = self.unflatten26(y)
         y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
