@@ -297,7 +297,7 @@ class DeepfakeDetector(nn.Module):
         self.layer2 = nn.Conv3d(32, 64, 3)
         self.ReLU = nn.ReLU()
         self.pool = nn.MaxPool3d(2)
-        self.flat_features = 64 * 3 * 10 * 32  # Calcul du nombre de features en sortie des couches convolutives
+        self.flat_features = 64 * 62 * 62 * 10  # Calculer la taille des features aplaties
         self.dense = nn.Linear(self.flat_features, 1)
         self.sigmoid = nn.Sigmoid()
 
