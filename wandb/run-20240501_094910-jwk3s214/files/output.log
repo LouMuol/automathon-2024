@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/raid/home/automathon_2024/account13/anon/automathon-2024/run.py", line 280, in <module>
+    offset = random.random() / 5
+NameError: name 'random' is not defined

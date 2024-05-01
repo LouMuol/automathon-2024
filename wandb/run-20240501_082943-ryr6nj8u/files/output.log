@@ -1,0 +1,30 @@
+/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/cuda/__init__.py:118: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torchinfo/torchinfo.py", line 295, in forward_pass
+    _ = model(*x, **kwargs)
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1582, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/raid/home/automathon_2024/account13/anon/automathon-2024/run.py", line 258, in forward
+    y = self.layer3(y)
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1582, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 610, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/nn/modules/conv.py", line 605, in _conv_forward
+    return F.conv3d(
+RuntimeError: Calculated padded input size per channel: (1 x 62 x 62). Kernel size: (3 x 3 x 3). Kernel size can't be greater than actual input size
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/raid/home/automathon_2024/account13/anon/automathon-2024/run.py", line 282, in <module>
+    summary(model, input_size=(batch_size, 3, 10, 256, 256))
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torchinfo/torchinfo.py", line 223, in summary
+    summary_list = forward_pass(
+  File "/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torchinfo/torchinfo.py", line 304, in forward_pass
+    raise RuntimeError(
+RuntimeError: Failed to run torchinfo. See above stack traces for more details. Executed layers up to: [Conv3d: 1, ReLU: 1, MaxPool3d: 1, Conv3d: 1, ReLU: 1, MaxPool3d: 1]
+Training model:

@@ -1,0 +1,8 @@
+/raid/home/automathon_2024/account13/.local/lib/python3.10/site-packages/torch/cuda/__init__.py:118: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/raid/home/automathon_2024/account13/anon/automathon-2024/run.py", line 282, in <module>
+    model = DeepfakeDetector().to(device)
+  File "/raid/home/automathon_2024/account13/anon/automathon-2024/run.py", line 242, in __init__
+    self.unflat = nn.unflatten(
+AttributeError: module 'torch.nn' has no attribute 'unflatten'
