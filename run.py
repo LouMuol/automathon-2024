@@ -243,22 +243,12 @@ for p in encoder.parameters():
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.dense = nn.Linear(1*62*62*64, 1)
-        self.layer1 = nn.Conv3d(3, 32, 3)
-        self.layer2 = nn.Conv3d(32, 64, 3)
-        self.ReLU = nn.ReLU()
-        self.pool = nn.MaxPool3d(2)
+        self.encoder = encoder
+        self.dense = nn.Linear(1000, 1)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        y = x.reshape(batch_size, 3, 10, 256, 256)
-        y = self.layer1(y)
-        y = self.ReLU(y)
-        y = self.pool(y)
-        y = self.layer2(y)
-        y = self.ReLU(y)
-        y = self.pool(y)
         y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
