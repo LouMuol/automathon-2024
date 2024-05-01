@@ -263,7 +263,7 @@ class DeepfakeDetector(nn.Module):
         y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
-        return x
+        return y
 
 # LOGGING
 
