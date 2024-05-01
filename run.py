@@ -252,6 +252,8 @@ class DeepfakeDetector(nn.Module):
     def forward(self, x):
         Ly = []
         for i in range(x.shape[1]):
+
+            print(x.shape)
             if x.shape[1] < x.shape[2]:
                 x = x.permute(0, 2, 1, 3, 4)
                 print(x.shape)
