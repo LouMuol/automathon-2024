@@ -302,7 +302,10 @@ class DeepfakeDetector(nn.Module):
 
     def forward(self, x):
         # Apply the interpolation to resize the input
-        x = F.interpolate(x, size=(224, 224), mode='trilinear', align_corners=False)
+        # Assurez-vous que x a la forme (N, C, D, H, W)
+        x = torch.unsqueeze(x, dim=2)  # Ajouter une dimension à la fin pour correspondre à la dimension D
+        x = F.interpolate(x, size=(10, 224, 224), mode='trilinear', align_corners=False)
+
         
         y = x.reshape(batch_size, 3, 10, 256, 256)  # Adjust the reshaping according to the new input size
         y = self.layer1(y)
