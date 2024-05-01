@@ -246,6 +246,7 @@ class DeepfakeDetector(nn.Module):
         super().__init__()
         self.encoder = encoder
         self.dense = nn.Linear(1000, 1)
+        self.dense2 = nn.Linear(nb_frames, 1)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
 
@@ -261,10 +262,12 @@ class DeepfakeDetector(nn.Module):
             y = self.encoder(y)
             y = self.flat(y)
             y = self.dense(y)
-            y = self.sigmoid(y)
             Ly.append(y)
         Y = torch.stack(Ly, 1)
         print(Y.shape)
+        Y = self.dense2(Y)
+        Y = Y.squeeze(2)
+        Y = self.sigmoid(Y)
         return Y
 
 # LOGGING
