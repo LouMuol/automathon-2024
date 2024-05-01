@@ -287,32 +287,34 @@ preprocess = transforms.Compose([
     )
 ])
 
+import torch.nn.functional as F
+
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.efficient = create_model('efficientnet_b0', pretrained=True)
-        # Modifier la sortie d'EfficientNet pour correspondre à l'entrée attendue par votre modèle
-        self.fc = nn.Linear(self.efficient.num_features, 1)
+        self.dense = nn.Linear(64, 1)
+        self.layer1 = nn.Conv3d(3, 32, 3)
+        self.layer2 = nn.Conv3d(32, 64, 3)
+        self.ReLU = nn.ReLU()
+        self.pool = nn.MaxPool3d(2)
+        self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
-        self.preprocess = transforms.Compose([
-            transforms.Resize((224, 224)),  # Redimensionner à la taille 224x224
-            transforms.ToTensor(),           # Convertir l'image en tenseur
-            transforms.Normalize(            # Normaliser les valeurs de pixel
-                mean=[0.485, 0.456, 0.406],  # Mean de ImageNet
-                std=[0.229, 0.224, 0.225]     # Std de ImageNet
-            )
-        ])
 
     def forward(self, x):
-        # Prétraiter les données pour les adapter à EfficientNet
-        x = self.preprocess(x)  # Adapter à la taille attendue (224x224)
-        # Appliquer EfficientNet pour extraire les caractéristiques
-        features = self.efficient(x)
-        # Passer les caractéristiques extraites à travers une couche linéaire
-        output = self.fc(features)
-        # Appliquer la fonction d'activation sigmoid pour obtenir des probabilités
-        output = self.sigmoid(output)
-        return output
+        # Apply the interpolation to resize the input
+        x = F.interpolate(x, size=(224, 224), mode='trilinear', align_corners=False)
+        
+        y = x.reshape(batch_size, 3, 10, 224, 224)  # Adjust the reshaping according to the new input size
+        y = self.layer1(y)
+        y = self.ReLU(y)
+        y = self.pool(y)
+        y = self.layer2(y)
+        y = self.ReLU(y)
+        y = self.pool(y)
+        y = self.flat(y)
+        y = self.dense(y)
+        y = self.sigmoid(y)
+        return y
 
 
 # LOGGING
