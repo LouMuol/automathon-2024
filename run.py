@@ -304,7 +304,7 @@ class DeepfakeDetector(nn.Module):
         # Apply the interpolation to resize the input
         x = F.interpolate(x, size=(224, 224), mode='trilinear', align_corners=False)
         
-        y = x.reshape(batch_size, 3, 10, 224, 224)  # Adjust the reshaping according to the new input size
+        y = x.reshape(batch_size, 3, 10, 256, 256)  # Adjust the reshaping according to the new input size
         y = self.layer1(y)
         y = self.ReLU(y)
         y = self.pool(y)
