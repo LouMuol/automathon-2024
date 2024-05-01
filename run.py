@@ -250,8 +250,6 @@ class DeepfakeDetector(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        if len(x.shape) == (batch_size, 3, self.nb_frames, 256, 256):
-            x = x.reshape(batch_size, self.nb_frames, 3, 256, 256)
         for i in range(self.nb_frames):
             y = self.encoder(x[:, i])
             y = y.unsqueeze(1) if i == 0 else torch.cat(
@@ -260,7 +258,7 @@ class DeepfakeDetector(nn.Module):
         y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
-        x = torch.stack(x, dim=1)
+        x = torch.stack(x, dim=2)
         return x
 
 # LOGGING
