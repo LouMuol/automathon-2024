@@ -244,7 +244,7 @@ class DeepfakeDetector(nn.Module):
         self.layer2 = nn.Conv3d(16, 32, 3, 1)
         self.layer3 = nn.Conv3d(32, 64, 3, 1)
         self.ReLU = nn.ReLU()
-        self.pool = nn.MaxPool2d(2, 2)
+        self.pool = nn.MaxPool3d(2, 2)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
 
