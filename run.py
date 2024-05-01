@@ -287,8 +287,6 @@ model = DeepfakeDetector().to(device)
 print("Training model:")
 summary(model, input_size=(batch_size, 3, 10, 256, 256))
 print("c'est live")
-summary(modbis, input_size=(batch_size, 3, 10, 224, 224))
-print("omg ça a marché")
 summary(efficient, input_size=(batch_size, 3, 224, 224))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 epochs = 5
