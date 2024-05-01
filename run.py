@@ -244,7 +244,7 @@ class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
         self.encoder = encoder
-        self.dense = nn.Linear(1000, 1)
+        self.dense = nn.Linear(1966080, 1)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
 
