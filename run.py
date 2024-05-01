@@ -236,15 +236,13 @@ experimental_dataset = VideoDataset(
 
 # MODELE
 from timm import create_model
-import torchvision.models.video as models
 
-modbis=models.slowfast_4x16_resnet50_kinetics400(pretrained=True)
 efficient = create_model('efficientnet_b0', pretrained=True)
 
 for p in efficient.parameters():
     p.requires_grad = False
-for p in modbis.parameters():
-    p.requires_grad = False
+
+"""
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
@@ -268,6 +266,41 @@ class DeepfakeDetector(nn.Module):
         y = self.dense(y)
         y = self.sigmoid(y)
         return y
+
+        
+        """
+
+from torchvision import transforms
+
+# Définir la transformation pour redimensionner les images à la taille attendue par EfficientNet
+preprocess = transforms.Compose([
+    transforms.Resize((224, 224)),  # Redimensionner à la taille 224x224
+    transforms.ToTensor(),           # Convertir l'image en tenseur
+    transforms.Normalize(            # Normaliser les valeurs de pixel
+        mean=[0.485, 0.456, 0.406],  # Mean de ImageNet
+        std=[0.229, 0.224, 0.225]     # Std de ImageNet
+    )
+])
+
+class DeepfakeDetector(nn.Module):
+    def __init__(self, nb_frames=10):
+        super().__init__()
+        self.efficient = create_model('efficientnet_b0', pretrained=True)
+        # Modifier la sortie d'EfficientNet pour correspondre à l'entrée attendue par votre modèle
+        self.fc = nn.Linear(self.efficient.num_features, 1)
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, x):
+        # Prétraiter les données pour les adapter à EfficientNet
+        x = self.preprocess_input(x)  # Adapter à la taille attendue (224x224)
+        # Appliquer EfficientNet pour extraire les caractéristiques
+        features = self.efficient(x)
+        # Passer les caractéristiques extraites à travers une couche linéaire
+        output = self.fc(features)
+        # Appliquer la fonction d'activation sigmoid pour obtenir des probabilités
+        output = self.sigmoid(output)
+        return output
+
 
 # LOGGING
 
