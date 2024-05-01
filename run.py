@@ -251,7 +251,7 @@ class DeepfakeDetector(nn.Module):
 
     def forward(self, x):
         if len(x.shape) == 5:
-            x = x.reshape(batch_size*self.nb_frames, 3, 256, 256)
+            x = x.reshape(batch_size, 3*self.nb_frames, 256, 256)
         y = self.encoder(x)
         y = self.flat(y)
         y = self.dense(y)
@@ -275,7 +275,7 @@ loss_fn = nn.MSELoss()
 model = DeepfakeDetector().to(device)
 print("Training model:")
 summary(model, input_size=(batch_size, 3, 10, 256, 256))
-summary(encoder, input_size=(batch_size, 3, 256, 256))
+summary(encoder, input_size=(batch_size, 3*10, 256, 256))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 epochs = 5
 loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
