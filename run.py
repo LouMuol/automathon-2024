@@ -256,7 +256,7 @@ class DeepfakeDetector(nn.Module):
     def forward(self, x):
         if x.shape[1] != 3:
             x = x.permute(0, 2, 1, 3, 4)
-        y = self.conv(y)
+        y = self.conv(x)
         y = self.ReLU(y)
         y = self.pool(y)
         y = torch.squeeze(y, 2)
