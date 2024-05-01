@@ -239,7 +239,7 @@ experimental_dataset = VideoDataset(
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.dense = nn.Linear(nb_frames*62*62*64, 1)
+        self.dense = nn.Linear(1*62*62*64, 1)
         self.layer1 = nn.Conv3d(3, 32, 3)
         self.layer2 = nn.Conv3d(32, 64, 3)
         self.ReLU = nn.ReLU()
