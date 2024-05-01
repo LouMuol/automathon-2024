@@ -244,28 +244,14 @@ for p in encoder.parameters():
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.flatten = nn.Flatten(0, 1)
         self.encoder = encoder
-        self.unflatten32 = nn.Unflatten(0, (batch_size, nb_frames))
-        self.unflatten26 = nn.Unflatten(0, (26, nb_frames))
         self.dense = nn.Linear(10000, 1)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        if x.shape != (32, 10, 3, 256, 256):
-            x = x.permute(0, 2, 1, 3, 4)
-            if x.shape != (32, 10, 3, 256, 256):
-                x = x.permute(0, 2, 1, 3, 4)
-                print(x.shape)
-        y = self.flatten(x)
+        y = x[:, 0]
         y = self.encoder(y)
-        if y.shape[0] == 320:
-            y = self.unflatten32(y)
-        elif y.shape[0] == 260:
-            y = self.unflatten26(y)
-        else:
-            print(y.shape)
         y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
