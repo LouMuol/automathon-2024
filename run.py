@@ -262,8 +262,10 @@ class DeepfakeDetector(nn.Module):
         y = self.encoder(y)
         if y.shape[0] == 32:
             y = self.unflatten32(y)
-        else:
+        elif y.shape[0] == 26:
             y = self.unflatten26(y)
+        else:
+            print(y.shape)
         y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
