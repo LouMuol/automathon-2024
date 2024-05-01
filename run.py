@@ -248,7 +248,7 @@ class DeepfakeDetector(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        if x.shape != (32, 3, 10, 256, 256):
+        if x.shape == (32, 10, 3, 256, 256):
             y = x.reshape(batch_size, 3, 10, 256, 256)
         else:
             y = x
