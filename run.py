@@ -245,24 +245,24 @@ class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
         self.flatten = nn.Flatten(0, 1)
-        self.unflatten = nn.Unflatten(0, (batch_size, nb_frames)
-        self.encoder=encoder
-        self.dense=nn.Linear(1000, 1)
-        self.flat=nn.Flatten()
-        self.sigmoid=nn.Sigmoid()
+        self.unflatten = nn.Unflatten(0, (batch_size, nb_frames))
+        self.encoder = encoder
+        self.dense = nn.Linear(1000, 1)
+        self.flat = nn.Flatten()
+        self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
         if x.shape != (32, 10, 3, 256, 256):
-            x=x.permute(0, 2, 1, 3, 4)
+            x = x.permute(0, 2, 1, 3, 4)
             if x.shape != (32, 10, 3, 256, 256):
-                x=x.permute(0, 2, 1, 3, 4)
+                x = x.permute(0, 2, 1, 3, 4)
                 print(x.shape)
-        y=self.flatten(x)
-        y=self.encoder(y)
-        y=self.unflatten(y)
-        y=self.flat(y)
-        y=self.dense(y)
-        y=self.sigmoid(y)
+        y = self.flatten(x)
+        y = self.encoder(y)
+        y = self.unflatten(y)
+        y = self.flat(y)
+        y = self.dense(y)
+        y = self.sigmoid(y)
         return x
 
 # LOGGING
@@ -270,58 +270,58 @@ class DeepfakeDetector(nn.Module):
 
 wandb.login(key="a446d513570a79c857317c3000584c5f6d6224f0")
 
-run=wandb.init(
+run = wandb.init(
     project="automathon"
 )
 
 # ENTRAINEMENT
 
-device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using {device}")
-batch_size=32
-loss_fn=nn.MSELoss()
-model=DeepfakeDetector().to(device)
+batch_size = 32
+loss_fn = nn.MSELoss()
+model = DeepfakeDetector().to(device)
 print("Training model:")
 summary(model, input_size=(batch_size, 3, 10, 256, 256))
-optimizer=torch.optim.Adam(model.parameters(), lr=0.001)
-epochs=5
-loader=DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+epochs = 5
+loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 # loader = DataLoader(experimental_dataset, batch_size=2, shuffle=True)
 
 print("Training...")
 for epoch in range(epochs):
     for sample in tqdm(loader):
         optimizer.zero_grad()
-        X, label, ID=sample
-        X=X.to(device)
-        label=label.to(device)
-        label_pred=model(X)
-        label=torch.unsqueeze(label, dim=1)
-        loss=loss_fn(label, label_pred)
+        X, label, ID = sample
+        X = X.to(device)
+        label = label.to(device)
+        label_pred = model(X)
+        label = torch.unsqueeze(label, dim=1)
+        loss = loss_fn(label, label_pred)
         loss.backward()
         optimizer.step()
         run.log({"loss": loss.item(), "epoch": epoch})
 
 # TEST
 
-loader=DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
-model=model.to(device)
-ids=[]
-labels=[]
+loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+model = model.to(device)
+ids = []
+labels = []
 print("Testing...")
 for sample in tqdm(loader):
-    X, ID=sample
+    X, ID = sample
     # ID = ID[0]
-    X=X.to(device)
-    label_pred=model(X)
+    X = X.to(device)
+    label_pred = model(X)
     ids.extend(list(ID))
-    pred=(label_pred > 0.5).long()
-    pred=pred.cpu().detach().numpy().tolist()
+    pred = (label_pred > 0.5).long()
+    pred = pred.cpu().detach().numpy().tolist()
     labels.extend(pred)
 
 # ENREGISTREMENT
 print("Saving...")
-tests=["id,label\n"] + \
+tests = ["id,label\n"] + \
     [f"{ID},{label_pred[0]}\n" for ID, label_pred in zip(ids, labels)]
 with open("submission.csv", "w") as file:
     file.writelines(tests)
