@@ -276,7 +276,7 @@ class DeepfakeDetector(nn.Module):
         """
 
 from torchvision import transforms
-
+"""
 # Définir la transformation pour redimensionner les images à la taille attendue par EfficientNet
 preprocess = transforms.Compose([
     transforms.Resize((224, 224)),  # Redimensionner à la taille 224x224
@@ -286,13 +286,14 @@ preprocess = transforms.Compose([
         std=[0.229, 0.224, 0.225]     # Std de ImageNet
     )
 ])
-
+"""
 import torch.nn.functional as F
+
 
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.dense = nn.Linear(64, 1)
+        self.dense = nn.Linear(1 * 62 * 62 * 64, 1)
         self.layer1 = nn.Conv3d(3, 32, 3)
         self.layer2 = nn.Conv3d(32, 64, 3)
         self.ReLU = nn.ReLU()
@@ -301,13 +302,7 @@ class DeepfakeDetector(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        # Apply the interpolation to resize the input
-        # Assurez-vous que x a la forme (N, C, D, H, W)
-        x = torch.unsqueeze(x, dim=2)  # Ajouter une dimension à la fin pour correspondre à la dimension D
-        x = F.interpolate(x, size=(10, 224, 224), mode='trilinear', align_corners=False)
-
-        
-        y = x.reshape(batch_size, 3, 10, 256, 256)  # Adjust the reshaping according to the new input size
+        y = x.reshape(x.size(0), 3, 10, 256, 256)
         y = self.layer1(y)
         y = self.ReLU(y)
         y = self.pool(y)
@@ -338,7 +333,6 @@ model = DeepfakeDetector().to(device)
 print("Training model:")
 summary(model, input_size=(batch_size, 3, 10, 256, 256))
 print("c'est live")
-summary(efficient, input_size=(batch_size, 3, 224, 224))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 epochs = 5
 loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
