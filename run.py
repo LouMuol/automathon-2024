@@ -280,7 +280,9 @@ preprocess = transforms.Compose([
         mean=[0.485, 0.456, 0.406],  # Mean de ImageNet
         std=[0.229, 0.224, 0.225]     # Std de ImageNet
     )
-])class DeepfakeDetector(nn.Module):
+])
+
+class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
         self.efficient = create_model('efficientnet_b0', pretrained=True)
