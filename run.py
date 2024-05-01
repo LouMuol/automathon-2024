@@ -94,7 +94,7 @@ nb_frames = 10
 
 # MAKE RESIZED DATASET
 resized_dir = os.path.join(dataset_dir, "resized_dataset")
-
+"""
 create_small_dataset = True
 errors = []
 if not os.path.exists(resized_dir) or create_small_dataset:
@@ -155,7 +155,7 @@ if not os.path.exists(resized_dir) or create_small_dataset:
     os.system(f"cp {os.path.join(dataset_dir, 'experimental_dataset', 'metadata.json')} {os.path.join(resized_dir, 'experimental_dataset', 'metadata.json')}")
     if errors:
         print(errors)
-
+"""
 use_small_dataset = True
 if use_small_dataset:
     dataset_dir = resized_dir
@@ -235,7 +235,7 @@ experimental_dataset = VideoDataset(
 
 
 # MODELE
-encoder = timm.create_model("resnet18", pretrained=True)
+encoder = timm.create_model("efficientnet_b0", pretrained=True)
 for p in encoder.parameters():
     p.requires_grad = False
 
@@ -245,25 +245,14 @@ class DeepfakeDetector(nn.Module):
         super().__init__()
         self.encoder = encoder
         self.dense = nn.Linear(1000, 1)
-        self.dense2 = nn.Linear(nb_frames, 1)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        Ly = []
-        for i in range(nb_frames):
-            if x.shape[1] < x.shape[2]:
-                x = x.permute(0, 2, 1, 3, 4)
-            y = x[:, i]
-            y = self.encoder(y)
-            y = self.flat(y)
-            y = self.dense(y)
-            Ly.append(y)
-        Y = torch.stack(Ly, 1)
-        Y = Y.squeeze(2)
-        Y = self.dense2(Y)
+        y = self.encoder(y)
+        y = self.flat(y)
+        y = self.dense(y)
         Y = self.sigmoid(Y)
-        return Y
 
 # LOGGING
 
