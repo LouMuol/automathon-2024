@@ -253,18 +253,14 @@ class DeepfakeDetector(nn.Module):
     def forward(self, x):
         Ly = []
         for i in range(nb_frames):
-
-            print(x.shape)
             if x.shape[1] < x.shape[2]:
                 x = x.permute(0, 2, 1, 3, 4)
-                print(x.shape)
             y = x[:, i]
             y = self.encoder(y)
             y = self.flat(y)
             y = self.dense(y)
             Ly.append(y)
         Y = torch.stack(Ly, 1)
-        print(Y.shape)
         Y = Y.squeeze(2)
         Y = self.dense2(Y)
         Y = self.sigmoid(Y)
