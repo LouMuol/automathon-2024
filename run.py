@@ -238,7 +238,7 @@ experimental_dataset = VideoDataset(
 from timm import create_model
 import torchvision.models.video as models
 
-modbis=models.x3d_xs(pretrained=True)
+modbis=models.slowfast_4x16_resnet50_kinetics400(pretrained=True)
 efficient = create_model('efficientnet_b0', pretrained=True)
 
 for p in efficient.parameters():
