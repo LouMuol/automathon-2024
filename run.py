@@ -252,7 +252,7 @@ class DeepfakeDetector(nn.Module):
 
     def forward(self, x):
         Ly = []
-        for i in range(x.shape[1]):
+        for i in range(nb_frames):
 
             print(x.shape)
             if x.shape[1] < x.shape[2]:
