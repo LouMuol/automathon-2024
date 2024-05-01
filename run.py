@@ -216,7 +216,12 @@ class VideoDataset(Dataset):
         """
         # resize the data into a reglar shape of 256x256 and normalize it
         # video = smart_resize(video, 256) / 255
-        video = video / 255
+        #video = video / 255
+
+        # Redimensionner le tensor vidéo pour qu'il ait la forme attendue par le modèle
+        video = video.permute(0, 3, 1, 2)  # Permuter les dimensions pour correspondre à la forme [N, C, H, W]
+        video = torch.nn.functional.interpolate(video, size=(256, 256))  # Redimensionner à la taille attendue
+        video = video / 255  # Normalisation si nécessaire
 
         ID = self.ids[self.video_files[idx]]
         if self.dataset_choice == "test":
