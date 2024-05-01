@@ -249,16 +249,20 @@ class DeepfakeDetector(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        x = self.layer1(x)
-        x = self.ReLU(x)
-        x = self.pool(x)
-        x = self.layer2(x)
-        x = self.ReLU(x)
-        x = self.pool(x)
-        x = self.layer3(x)
-        x = self.ReLU(x)
-        x = self.pool(x)
-        y = self.flat(x)
+        for i in range(x.shape[2]):
+            y = self.layer1(x[:, :, i])
+            y = self.ReLU(y)
+            y = self.pool(y)
+            y = self.layer2(y)
+            y = self.ReLU(y)
+            y = self.pool(y)
+            y = self.layer3(y)
+            y = self.ReLU(y)
+            y = self.pool(y)
+            y = self.flat(y)
+            y = y.unsqueeze(0) if i == 0 else torch.cat(
+                [y.unsqueeze(0), y.unsqueeze(0)], dim=0)
+        y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
         return y
