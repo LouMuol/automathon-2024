@@ -264,7 +264,7 @@ class DeepfakeDetector(nn.Module):
         y = self.conv(y)
         y = self.ReLU(y)
         y = self.pool(y)
-        y = y.torch.squeeze(2)
+        y = torch.squeeze(y, 2)
 
         y = self.encoder(y)
         y = self.flat(y)
