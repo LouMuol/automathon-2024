@@ -250,10 +250,17 @@ class DeepfakeDetector(nn.Module):
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
         self.conv = nn.Conv3d(3, 3, (3, 1, 1))
+        self.ReLU = nn.LeakyReLU(0.2)
 
     def forward(self, x):
 
         y = self.conv(x)
+        y = self.ReLU(y)
+        y = self.conv(y)
+        y = self.ReLU(y)
+        y = self.conv(y)
+        y = self.ReLU(y)
+        y = self.conv(y)
         y = self.encoder(y)
         y = self.flat(y)
         y = self.dense(y)
