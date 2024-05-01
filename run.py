@@ -239,7 +239,7 @@ experimental_dataset = VideoDataset(
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
-        self.unflat = torch.Unflatten(2, (batch_size*10, 3, 256, 256))
+        self.unflat = nn.Unflatten(2, (batch_size*10, 3, 256, 256))
         self.dense = nn.Linear(nb_frames*3*256*256*64*10, 1)
         self.layer1 = nn.Conv2d(3, 16, 3, 1)
         self.layer2 = nn.Conv2d(16, 32, 3, 1)
