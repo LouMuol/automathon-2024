@@ -250,12 +250,8 @@ class DeepfakeDetector(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        if x.shape != (32, 10, 3, 256, 256):
-            x = x.permute(0, 2, 1, 3, 4)
-            if x.shape != (32, 10, 3, 256, 256):
-                x = x.permute(0, 2, 1, 3, 4)
-                print(x.shape)
-        y = self.flatten(x)
+        if len(x.shape) == 5:
+            x = x.reshape(32, -1, 3, 256, 256)
         y = self.encoder(y)
         y = self.flat(y)
         y = self.dense(y)
