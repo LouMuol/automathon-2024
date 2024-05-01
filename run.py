@@ -254,7 +254,8 @@ class DeepfakeDetector(nn.Module):
         self.pool = nn.MaxPool3d((2, 1, 1))
 
     def forward(self, x):
-
+        if x.shape[1] != 3:
+            x = x.permute(0, 2, 1, 3, 4)
         y = self.conv(x)
         y = self.ReLU(y)
         y = self.conv(y)
