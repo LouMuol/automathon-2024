@@ -236,8 +236,14 @@ experimental_dataset = VideoDataset(
 
 # MODELE
 from timm import create_model
-efficient = create_model('s3d_g', pretrained=True)
+import torchvision.models.video as models
+
+modbis=models.x3d_xs(pretrained=True)
+efficient = create_model('efficientnet_b0', pretrained=True)
+
 for p in efficient.parameters():
+    p.requires_grad = False
+for p in modbis.parameters():
     p.requires_grad = False
 class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
@@ -281,7 +287,9 @@ model = DeepfakeDetector().to(device)
 print("Training model:")
 summary(model, input_size=(batch_size, 3, 10, 256, 256))
 print("c'est live")
-summary(efficient, input_size=(batch_size, 3, 10, 224, 224))
+summary(modbis, input_size=(batch_size, 3, 10, 224, 224))
+print("omg ça a marché")
+summary(efficient, input_size=(batch_size, 3, 224, 224))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 epochs = 5
 loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
