@@ -195,7 +195,7 @@ class VideoDataset(Dataset):
             with open(os.path.join(self.root_dir, "metadata.json"), 'r') as file:
                 self.data = json.load(file)
                 self.data = {k[:-3] + "pt": (torch.tensor(float(
-                    1)) if v == 'FAKE' else torch.tensor(float(0))) for k, v in self.data.items()}
+                    1)) if v == 'fake' else torch.tensor(float(0))) for k, v in self.data.items()}
 
         # self.video_files = [f for f in os.listdir(self.root_dir) if f.endswith('.mp4')]
         self.video_files = [f for f in os.listdir(
@@ -296,6 +296,7 @@ loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
 print("Training...")
 for epoch in range(epochs):
+    print(f"Epoch {epoch}")
     for sample in tqdm(loader):
         optimizer.zero_grad()
         X, label, ID = sample
