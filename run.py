@@ -252,7 +252,7 @@ class DeepfakeDetector(nn.Module):
     def forward(self, x):
         if len(x.shape) == 5:
             x = x.reshape(32, -1, 3, 256, 256)
-        y = self.encoder(y)
+        y = self.encoder(x)
         y = self.flat(y)
         y = self.dense(y)
         y = self.sigmoid(y)
