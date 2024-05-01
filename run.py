@@ -249,19 +249,13 @@ class DeepfakeDetector(nn.Module):
         self.dense = nn.Linear(1000, 1)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
-        self.conv = nn.Conv3d(3, 3, (3, 1, 1))
+        self.conv = nn.Conv3d(3, 3, (9, 1, 1))
         self.ReLU = nn.LeakyReLU(0.2)
         self.pool = nn.MaxPool3d((2, 1, 1))
 
     def forward(self, x):
         if x.shape[1] != 3:
             x = x.permute(0, 2, 1, 3, 4)
-        y = self.conv(x)
-        y = self.ReLU(y)
-        y = self.conv(y)
-        y = self.ReLU(y)
-        y = self.conv(y)
-        y = self.ReLU(y)
         y = self.conv(y)
         y = self.ReLU(y)
         y = self.pool(y)
