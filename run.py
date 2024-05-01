@@ -240,16 +240,16 @@ class DeepfakeDetector(nn.Module):
     def __init__(self, nb_frames=10):
         super().__init__()
         self.dense = nn.Linear(nb_frames*3*256*256*64, 1)
-        self.layer1 = nn.Conv2d(3, 16, 3, 1)
-        self.layer2 = nn.Conv2d(16, 32, 3, 1)
-        self.layer3 = nn.Conv2d(32, 64, 3, 1)
+        self.layer1 = nn.Conv2d(3*10, 32, 3, 1)
+        self.layer2 = nn.Conv2d(32, 64, 3, 1)
+        self.layer3 = nn.Conv2d(64, 64, 3, 1)
         self.ReLU = nn.ReLU()
         self.pool = nn.MaxPool2d(2, 2)
         self.flat = nn.Flatten()
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        y = torch.reshape(x, (batch_size*10, 3, 256, 256))
+        y = torch.reshape(x, (batch_size*10, 10*3, 256, 256))
         y = self.layer1(y)
         y = self.ReLU(y)
         y = self.pool(y)
